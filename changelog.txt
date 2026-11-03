@@ -1,3 +1,11 @@
+[B]Version 21.0.1 (Omega fork by Cybergrimes)[/B]
+- Kodi 21 Omega: requires xbmc.gui 5.17.0; add-on name "Embuary (Omega)", ID unchanged (skin.embuary-matrix)
+- Requires script.embuary.helper 2.0.9 and script.embuary.info 2.0.9
+- New default colour palette: Blue Radiance (previous default is now selectable as "Green")
+- New default home widgets: Continue Watching, Next Up, Latest Movies, Latest TV Shows
+- Background video playback hidden by default
+- Language files untouched
+
 [B]Version 18.8.8[/B]
 - Added support for new Artist Slideshow version
 - Added busy spinner to genre window
