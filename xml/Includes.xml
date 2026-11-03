@@ -44,11 +44,11 @@
 
 	<expression name="HasFanart">[!String.IsEmpty(ListItem.Art(fanart)) | !String.IsEmpty(ListItem.Art(tvshow.fanart)) | !String.IsEmpty(ListItem.Art(season.fanart))]</expression>
 
-	<expression name="DefaultTheme">[String.IsEqual(Skin.CurrentColourTheme,SKINDEFAULT) | String.StartsWith(Skin.CurrentColourTheme,Default)]</expression>
+	<expression name="DefaultTheme">[String.IsEqual(Skin.CurrentColourTheme,Green)]</expression>
 
 	<expression name="BlurVignette">[Skin.HasSetting(BlurEnabled) + !String.IsEmpty(Window(home).Property(listitem_blurred)) + ![[Player.HasVideo | Player.HasGame] + !Skin.HasSetting(HideBackgroundPlayback)]]</expression>
 
-	<expression name="IsDefaultSkin">[String.IsEqual(Skin.CurrentColourTheme,SKINDEFAULT) | String.StartsWith(Skin.CurrentColourTheme,Default)]</expression>
+	<expression name="IsDefaultSkin">[String.IsEqual(Skin.CurrentColourTheme,Green)]</expression>
 
 	<expression name="IsHDR">[[String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,video)] + [String.Contains(ListItem.Label,(HDR)) | String.Contains(ListItem.Filename,.HDR.) | String.Contains(ListItem.Filename,-HDR-) | String.Contains(ListItem.Filename,- HDR -) | String.Contains(ListItem.Filename,(HDR))]]</expression>
 

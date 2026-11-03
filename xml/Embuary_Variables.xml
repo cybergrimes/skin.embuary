@@ -106,7 +106,7 @@
 	</variable>
 	<variable name="SkinTheme">
 		<value condition="!String.IsEqual(Skin.CurrentColourTheme,SKINDEFAULT) + !String.StartsWith(Skin.CurrentColourTheme,Default)">$INFO[Skin.CurrentColourTheme]</value>
-		<value>Default</value>
+		<value>Blue Radiance</value>
 	</variable>
 	<variable name="CurrentColorLabel">
 		<value condition="!String.IsEmpty(Window.Property(colorstring)) + !String.IsEqual(Window.Property(colorstring),None)">$LOCALIZE[31265]$INFO[Window.Property(colorstring), #]</value>
@@ -629,7 +629,7 @@
 		<value>2 ($LOCALIZE[571])</value>
 	</variable>
 	<variable name="BackgroundImageColor">
-		<value condition="String.IsEqual(Skin.CurrentColourTheme,SKINDEFAULT) | String.StartsWith(Skin.CurrentColourTheme,Default)">ff000000</value>
+		<value condition="String.IsEqual(Skin.CurrentColourTheme,Green)">ff000000</value>
 		<value>$INFO[Window(home).Property(listitem_color)]</value>
 	</variable>
 	<variable name="FakeButtonAddonInfo13">

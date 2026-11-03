@@ -3,6 +3,16 @@
 	<zorder>999</zorder>
 	<defaultcontrol always="true">101</defaultcontrol>
 	<onload>Skin.SetBool(ClearPlaylist)</onload>
+	<!-- first run defaults: background video hidden, Continue Watching / Next Up / Latest Movies / Latest TV Shows widgets (pos_1 is set last as it is the guard) -->
+	<onload condition="!Skin.HasSetting(EmbuaryInitMessage) + String.IsEmpty(Skin.String(home_widget_pos_1))">Skin.SetBool(HideBackgroundPlayback)</onload>
+	<onload condition="!Skin.HasSetting(EmbuaryInitMessage) + String.IsEmpty(Skin.String(home_widget_pos_1))">Skin.SetString(home_widget_pos_2,W_NextUp)</onload>
+	<onload condition="!Skin.HasSetting(EmbuaryInitMessage) + String.IsEmpty(Skin.String(home_widget_pos_1))">Skin.SetString(home_widget_pos_2.label,$LOCALIZE[31012])</onload>
+	<onload condition="!Skin.HasSetting(EmbuaryInitMessage) + String.IsEmpty(Skin.String(home_widget_pos_1))">Skin.SetString(home_widget_pos_3,W_NewMovies)</onload>
+	<onload condition="!Skin.HasSetting(EmbuaryInitMessage) + String.IsEmpty(Skin.String(home_widget_pos_1))">Skin.SetString(home_widget_pos_3.label,$LOCALIZE[31301])</onload>
+	<onload condition="!Skin.HasSetting(EmbuaryInitMessage) + String.IsEmpty(Skin.String(home_widget_pos_1))">Skin.SetString(home_widget_pos_4,W_NewEpisodes)</onload>
+	<onload condition="!Skin.HasSetting(EmbuaryInitMessage) + String.IsEmpty(Skin.String(home_widget_pos_1))">Skin.SetString(home_widget_pos_4.label,$LOCALIZE[31302])</onload>
+	<onload condition="!Skin.HasSetting(EmbuaryInitMessage) + String.IsEmpty(Skin.String(home_widget_pos_1))">Skin.SetString(home_widget_pos_1.label,$LOCALIZE[31080])</onload>
+	<onload condition="!Skin.HasSetting(EmbuaryInitMessage) + String.IsEmpty(Skin.String(home_widget_pos_1))">Skin.SetString(home_widget_pos_1,W_InProgressMedia)</onload>
 	<include>PropertyIncludes</include>
 	<controls>
 		<control type="group">
