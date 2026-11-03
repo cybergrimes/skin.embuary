@@ -16,7 +16,9 @@ You are allowed to:
 
 
 # Kodi repository feed (GitHub Pages)
-The folder `docs/` is served by GitHub Pages at https://cybergrimes.github.io/skin.embuary/. `docs/repo/addons.xml` lists the skin, `script.embuary.helper`, `script.embuary.info` and the repository add-on `repository.cybergrimes.embuary`. With that repository installed, Kodi offers new skin versions as normal add-on updates. The other skin dependencies (`xbmc.gui`, `resource.uisounds.embuary`, `plugin.program.autocompletion`, `script.skinshortcuts`) come from Kodi's official repository.
+The folder `docs/` is served by GitHub Pages at https://cybergrimes.github.io/skin.embuary/. `docs/repo/addons.xml` lists the skin, `script.embuary.helper`, `script.embuary.info` and the repository add-on `repository.embuary`. With that repository installed, Kodi offers new skin versions as normal add-on updates. The other skin dependencies (`xbmc.gui`, `resource.uisounds.embuary`, `plugin.program.autocompletion`, `script.skinshortcuts`) come from Kodi's official repository.
+
+If you installed the earlier repository add-on `repository.cybergrimes.embuary`, uninstall it before installing `repository.embuary`, otherwise two repositories list the same add-ons.
 
 ## Releasing a new skin version
 1. Bump `version` in `addon.xml` and add a `changelog.txt` entry. Kodi only offers an update when the version number is higher.

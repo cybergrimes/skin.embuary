@@ -21,7 +21,7 @@ import zipfile
 from pathlib import Path
 
 BASE_URL = "https://cybergrimes.github.io/skin.embuary/repo/"
-REPO_ID = "repository.cybergrimes.embuary"
+REPO_ID = "repository.embuary"
 REPO_VERSION = "1.0.0"
 ADDON_ZIPS = {
     "script.embuary.helper": "2.0.9",
@@ -35,8 +35,8 @@ REPO = DOCS / "repo"
 DOWNLOAD = DOCS / "download"
 
 REPO_ADDON_XML = f"""<?xml version="1.0" encoding="UTF-8"?>
-<addon id="{REPO_ID}" name="Embuary Repository (cybergrimes fork)" version="{REPO_VERSION}" provider-name="cybergrimes">
-	<extension point="xbmc.addon.repository" name="Embuary Repository (cybergrimes fork)">
+<addon id="{REPO_ID}" name="Embuary Repository" version="{REPO_VERSION}" provider-name="cybergrimes (fork), sualfred (original author)">
+	<extension point="xbmc.addon.repository" name="Embuary Repository">
 		<dir>
 			<info compressed="false">{BASE_URL}addons.xml</info>
 			<checksum>{BASE_URL}addons.xml.md5</checksum>

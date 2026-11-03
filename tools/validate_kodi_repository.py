@@ -40,7 +40,7 @@ def main():
     ids = {}
     for a in tree.findall("addon"):
         ids[a.get("id")] = a.get("version")
-    check(set(ids) == {"repository.cybergrimes.embuary", "script.embuary.helper", "script.embuary.info", "skin.embuary-matrix"},
+    check(set(ids) == {"repository.embuary", "script.embuary.helper", "script.embuary.info", "skin.embuary-matrix"},
           f"addons.xml entries: {ids}")
 
     for aid, ver in ids.items():
@@ -74,8 +74,8 @@ def main():
             print(f"note {dep} {need} not in feed: must come from Kodi official repo / core")
 
     # repository add-on URLs resolve
-    with zipfile.ZipFile(DOCS / "repo" / "repository.cybergrimes.embuary" / "repository.cybergrimes.embuary-1.0.0.zip") as zf:
-        r = ET.fromstring(zf.read("repository.cybergrimes.embuary/addon.xml"))
+    with zipfile.ZipFile(DOCS / "repo" / "repository.embuary" / "repository.embuary-1.0.0.zip") as zf:
+        r = ET.fromstring(zf.read("repository.embuary/addon.xml"))
     d = r.find(".//dir")
     for tag in ("info", "checksum"):
         check(local(d.find(tag).text).is_file(), f"repo add-on <{tag}> URL resolves: {d.find(tag).text}")
