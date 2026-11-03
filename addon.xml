@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="skin.embuary-matrix" version="21.0.1" name="Embuary (Omega)" provider-name="Cybergrimes (fork), sualfred (original author)">
+<addon id="skin.embuary-matrix" version="21.0.1" name="Embuary (Omega)" provider-name="cybergrimes (fork), sualfred (original author)">
 	<requires>
 		<import addon="xbmc.gui" version="5.17.0"/>
 		<import addon="script.embuary.helper" version="2.0.9"/>
@@ -12,9 +12,9 @@
 		<res width="1920" height="1080" aspect="16:9" default="true" folder="xml" />
 	</extension>
 	<extension point="xbmc.addon.metadata">
-		<summary lang="en_GB">Embuary skin by Sualfred (Omega fork by Cybergrimes)</summary>
+		<summary lang="en_GB">Embuary skin by Sualfred (Omega fork by cybergrimes)</summary>
 		<summary lang="de_DE">Embuary Skin von Sualfred</summary>
-		<description lang="en_GB">Embuary is based on the web UI of Emby and has been developed for Emby-For-Kodi and EmbyCon users, but will also work for any other common Kodi setup. This is a fork of the original Embuary skin by Sualfred (https://github.com/sualfred/skin.embuary), adapted for Kodi 21 Omega by Cybergrimes. Licensed under CC-BY-NC-ND-4.0 like the original.</description>
+		<description lang="en_GB">Embuary is based on the web UI of Emby and has been developed for Emby-For-Kodi and EmbyCon users, but will also work for any other common Kodi setup. This is a fork of the original Embuary skin by Sualfred (https://github.com/sualfred/skin.embuary), adapted for Kodi 21 Omega by cybergrimes. Licensed under CC-BY-NC-ND-4.0 like the original.</description>
 		<description lang="de_DE">Embuary ist dem Web UI von Emby nachempfunden und für Emby-For-Kodi und EmbyCon Nutzer entwickelt worden, aber funktioniert auch für alle gängigen Kodi Setups.</description>
 		<disclaimer lang="en_GB">No mouse support. With the installation of the skin you agree that you don't use it in combination with blacklisted and illegal Kodi add-ons. I'm not associated with any available build and I won't give any support to blacklisted, banned or illegal third party addons.</disclaimer>
 		<disclaimer lang="de_DE">Keine Maus Unterstützung. Mit der Installation des Skins erklärst du dich damit einverstanden keine verbotenen und illegalen Addons von Kodi damit zu benutzen. Ich stehe in keinerlei Verbindung zu verfübaren Builds und gebe keinen Support für diese oder andere illegalen Drittanbieter-Addons.</disclaimer>

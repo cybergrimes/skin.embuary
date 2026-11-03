@@ -1,5 +1,5 @@
 # skin.embuary
-This is a fork of the Embuary skin by Sualfred (https://github.com/sualfred/skin.embuary), adapted for Kodi 21 Omega by Cybergrimes. Original work and artwork by Sualfred, licensed CC BY-NC-ND 4.0 (unchanged).
+This is a fork of the Embuary skin by Sualfred (https://github.com/sualfred/skin.embuary), adapted for Kodi 21 Omega by cybergrimes. Original work and artwork by Sualfred, licensed CC BY-NC-ND 4.0 (unchanged).
 
 Embuary is based on the web UI of Emby and has been developed for Emby-For-kodi users, but it doesn't require Emby at all and will also work with a regular Kodi setup.
 
