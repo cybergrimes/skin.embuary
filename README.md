@@ -16,11 +16,11 @@ You are allowed to:
 
 
 # Kodi repository feed (GitHub Pages)
-The folder docs/ is served by GitHub Pages at https://cybergrimes.github.io/skin.embuary/. docs/repo/addons.xml lists the skin, script.embuary.helper, script.embuary.info and the repository add-on epository.cybergrimes.embuary. With that repository installed, Kodi offers new skin versions as normal add-on updates. script.xbmc.gui-level and other dependencies (xbmc.gui, esource.uisounds.embuary, plugin.program.autocompletion, script.skinshortcuts) come from Kodi's official repository.
+The folder `docs/` is served by GitHub Pages at https://cybergrimes.github.io/skin.embuary/. `docs/repo/addons.xml` lists the skin, `script.embuary.helper`, `script.embuary.info` and the repository add-on `repository.cybergrimes.embuary`. With that repository installed, Kodi offers new skin versions as normal add-on updates. The other skin dependencies (`xbmc.gui`, `resource.uisounds.embuary`, `plugin.program.autocompletion`, `script.skinshortcuts`) come from Kodi's official repository.
 
 ## Releasing a new skin version
-1. Bump ersion in ddon.xml (and add a changelog.txt entry). Kodi only updates when the version number is higher.
-2. Build the skin ZIP named skin.embuary-omega-<version>.zip (single root folder skin.embuary-matrix/, no .git/tooling, no .psd) and put it with the approved Helper/Info ZIPs in one folder.
-3. Run python tools/build_kodi_repository.py --approved-dir <folder>. It regenerates docs/repo/ (feed ZIP named skin.embuary-matrix-<version>.zip, ddons.xml, ddons.xml.md5) and docs/download/.
-4. Run python tools/validate_kodi_repository.py --approved-dir <folder> (must exit 0).
-5. Update the version links in docs/index.html, commit and merge to master; Pages publishes /docs.
+1. Bump `version` in `addon.xml` and add a `changelog.txt` entry. Kodi only offers an update when the version number is higher.
+2. Build the skin ZIP named `skin.embuary-omega-<version>.zip` (single root folder `skin.embuary-matrix/`, no .git/tooling, no .psd) and put it in one folder with the approved Helper/Info ZIPs.
+3. Run `python tools/build_kodi_repository.py --approved-dir <folder>`. It regenerates `docs/repo/` (feed ZIP `skin.embuary-matrix-<version>.zip`, `addons.xml`, `addons.xml.md5`) and `docs/download/`.
+4. Run `python tools/validate_kodi_repository.py --approved-dir <folder>` (must exit 0).
+5. Update the version links in `docs/index.html`, commit and merge to `master`; Pages publishes `/docs`.
