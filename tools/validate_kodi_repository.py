@@ -40,9 +40,8 @@ def main():
     ids = {}
     for a in tree.findall("addon"):
         ids[a.get("id")] = a.get("version")
-    check(set(ids) == {"repository.cybergrimes.embuary", "script.embuary.helper", "script.embuary.info"},
+    check(set(ids) == {"repository.cybergrimes.embuary", "script.embuary.helper", "script.embuary.info", "skin.embuary-matrix"},
           f"addons.xml entries: {ids}")
-    check("skin.embuary-matrix" not in ids, "skin not listed in addons.xml (direct download only)")
 
     for aid, ver in ids.items():
         z = DOCS / "repo" / aid / f"{aid}-{ver}.zip"
@@ -58,9 +57,21 @@ def main():
             a = approved / z.name
             check(a.is_file() and a.read_bytes() == z.read_bytes(), f"{z.name} byte-identical to approved file")
 
-    skin = DOCS / "download" / "skin.embuary-omega-21.0.1.zip"
+    sver = ids.get("skin.embuary-matrix")
+    skin = DOCS / "download" / f"skin.embuary-omega-{sver}.zip"
     a = approved / skin.name
-    check(skin.is_file() and a.is_file() and skin.read_bytes() == a.read_bytes(), "skin ZIP byte-identical to approved file")
+    check(skin.is_file() and a.is_file() and skin.read_bytes() == a.read_bytes(), "download skin ZIP byte-identical to approved file")
+    feed = DOCS / "repo" / "skin.embuary-matrix" / f"skin.embuary-matrix-{sver}.zip"
+    check(feed.is_file() and feed.read_bytes() == a.read_bytes(), "feed skin ZIP byte-identical to approved file")
+
+    # dependency resolution: feed provides helper/info; the rest must come from Kodi official repo
+    skin_el = next(a for a in tree.findall("addon") if a.get("id") == "skin.embuary-matrix")
+    for imp in skin_el.findall(".//import"):
+        dep, need = imp.get("addon"), imp.get("version")
+        if dep in ids:
+            check(ids[dep] == need, f"dependency {dep} {need} provided by this feed ({ids[dep]})")
+        else:
+            print(f"note {dep} {need} not in feed: must come from Kodi official repo / core")
 
     # repository add-on URLs resolve
     with zipfile.ZipFile(DOCS / "repo" / "repository.cybergrimes.embuary" / "repository.cybergrimes.embuary-1.0.0.zip") as zf:
@@ -71,7 +82,7 @@ def main():
     datadir = d.find("datadir").text
     for aid, ver in ids.items():
         check(local(f"{datadir}{aid}/{aid}-{ver}.zip").is_file(), f"datadir URL resolves: {datadir}{aid}/{aid}-{ver}.zip")
-    check(local(PAGES + "download/skin.embuary-omega-21.0.1.zip").is_file(), "download URL resolves")
+    check(local(PAGES + f"download/skin.embuary-omega-{sver}.zip").is_file(), "download URL resolves")
     check((DOCS / "index.html").is_file(), "index.html present")
 
     sys.exit(1 if errors else 0)

@@ -5,10 +5,11 @@ Usage:
     python tools/build_kodi_repository.py --approved-dir "C:\\path\\to\\approved\\zips"
 
 The approved add-on ZIPs (script.embuary.helper-<ver>.zip, script.embuary.info-<ver>.zip)
-are copied byte-for-byte. The skin ZIP is deliberately NOT part of addons.xml: Kodi derives
-the package filename from add-on id + version (skin.embuary-matrix-21.0.1.zip), but the
-reviewed skin ZIP is named skin.embuary-omega-21.0.1.zip. It is shipped as a direct download
-under docs/download/ instead.
+are copied byte-for-byte. The skin ZIP (skin.embuary-omega-<ver>.zip in the approved dir, or
+--skin-zip) is read for its add-on id/version, listed in addons.xml and published byte-identical
+as repo/skin.embuary-matrix/skin.embuary-matrix-<ver>.zip (the name Kodi derives from id +
+version). The same file is also kept as docs/download/skin.embuary-omega-<ver>.zip.
+Releasing a new skin version: bump addon.xml, build the ZIP, run this script, run the validator, merge.
 """
 import argparse
 import hashlib
@@ -26,7 +27,7 @@ ADDON_ZIPS = {
     "script.embuary.helper": "2.0.9",
     "script.embuary.info": "2.0.9",
 }
-SKIN_ZIP = "skin.embuary-omega-21.0.1.zip"
+SKIN_ID = "skin.embuary-matrix"
 
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
@@ -53,6 +54,14 @@ REPO_ADDON_XML = f"""<?xml version="1.0" encoding="UTF-8"?>
 """
 
 
+def vkey(v):
+    return tuple(int(x) if x.isdigit() else 0 for x in re.split(r"[.]", v))
+
+
+def vkey(v):
+    return tuple(int(x) if x.isdigit() else 0 for x in v.split("."))
+
+
 def sha256(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
@@ -74,13 +83,29 @@ def strip_decl(xml):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--approved-dir", required=True)
+    ap.add_argument("--skin-zip", help="skin ZIP; default: highest skin.embuary-omega-*.zip in approved dir")
     args = ap.parse_args()
     approved = Path(args.approved_dir)
 
-    if REPO.exists():
-        shutil.rmtree(REPO)
-    REPO.mkdir(parents=True)
-    DOWNLOAD.mkdir(parents=True, exist_ok=True)
+    if args.skin_zip:
+        skin_src = Path(args.skin_zip)
+    else:
+        found = sorted(approved.glob("skin.embuary-omega-*.zip"), key=lambda p: vkey(p.stem.split("-")[-1]))
+        if not found:
+            sys.exit("no skin.embuary-omega-*.zip in approved dir")
+        skin_src = found[-1]
+    if not skin_src.is_file():
+        sys.exit(f"missing skin zip: {skin_src}")
+    skin_xml = addon_xml_from_zip(skin_src, SKIN_ID)
+    m = re.search(r"<addon\b[^>]*\bid=\"([^\"]+)\"[^>]*\bversion=\"([^\"]+)\"", skin_xml)
+    if not m or m.group(1) != SKIN_ID:
+        sys.exit("skin addon.xml id mismatch")
+    skin_version = m.group(2)
+
+    for d in (REPO, DOWNLOAD):
+        if d.exists():
+            shutil.rmtree(d)
+        d.mkdir(parents=True)
 
     entries = []
 
@@ -111,11 +136,15 @@ def main():
             sys.exit(f"copy of {name} is not byte-identical")
         entries.append(strip_decl(xml))
 
-    # skin ZIP: direct download only
-    skin_src = approved / SKIN_ZIP
-    if not skin_src.is_file():
-        sys.exit(f"missing approved zip: {skin_src}")
-    shutil.copyfile(skin_src, DOWNLOAD / SKIN_ZIP)
+    # skin: feed entry plus direct download, byte-identical to the approved ZIP
+    skin_dir = REPO / SKIN_ID
+    skin_dir.mkdir()
+    feed_zip = skin_dir / f"{SKIN_ID}-{skin_version}.zip"
+    shutil.copyfile(skin_src, feed_zip)
+    shutil.copyfile(skin_src, DOWNLOAD / f"skin.embuary-omega-{skin_version}.zip")
+    if sha256(skin_src) != sha256(feed_zip):
+        sys.exit("skin copy is not byte-identical")
+    entries.append(strip_decl(skin_xml))
 
     addons_xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<addons>\n'
     addons_xml += "\n".join(entries) + "\n</addons>\n"
