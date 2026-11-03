@@ -34,8 +34,8 @@ REPO = DOCS / "repo"
 DOWNLOAD = DOCS / "download"
 
 REPO_ADDON_XML = f"""<?xml version="1.0" encoding="UTF-8"?>
-<addon id="{REPO_ID}" name="Embuary Repository (Cybergrimes fork)" version="{REPO_VERSION}" provider-name="Cybergrimes">
-	<extension point="xbmc.addon.repository" name="Embuary Repository (Cybergrimes fork)">
+<addon id="{REPO_ID}" name="Embuary Repository (cybergrimes fork)" version="{REPO_VERSION}" provider-name="cybergrimes">
+	<extension point="xbmc.addon.repository" name="Embuary Repository (cybergrimes fork)">
 		<dir>
 			<info compressed="false">{BASE_URL}addons.xml</info>
 			<checksum>{BASE_URL}addons.xml.md5</checksum>
@@ -44,7 +44,7 @@ REPO_ADDON_XML = f"""<?xml version="1.0" encoding="UTF-8"?>
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<summary lang="en_GB">Feed for the Embuary Omega fork add-ons</summary>
-		<description lang="en_GB">Provides script.embuary.helper and script.embuary.info for the Embuary (Omega) skin fork by Cybergrimes, based on the work of Sualfred.</description>
+		<description lang="en_GB">Provides script.embuary.helper and script.embuary.info for the Embuary (Omega) skin fork by cybergrimes, based on the work of Sualfred.</description>
 		<platform>all</platform>
 		<license>CC-BY-NC-ND-4.0</license>
 		<source>https://github.com/cybergrimes/skin.embuary</source>
